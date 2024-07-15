@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="header">
+        <h1>Animal detection and count</h1>
+    </div>
+
+    <div class="container">
+        <div class="box" id="leftBox">
+            <div>
+                <form id="uploadForm" method="post" enctype="multipart/form-data" action="/prediction">
+                    <input id="input_image" type="file" name="image" accept="image/*" style="height:{{ ing }}; width: {{inw}};">
+                </form>
+            </div>
+            <div class="boxi">
+                {% if original_image %}
+                <img id="imagePreview" src="{{ original_image }}" alt="Image Preview">
+                {% endif %}
+            </div>
+            <div class="text-below">
+                <p>{{uptext}}</p>
+            </div>
+        </div>
+        <div class="box" id="rightBox">
+            {% if processed_image %}
+            <img id="processedImage" src="{{ processed_image }}" alt="Processed Image">
+            {% endif %}
+        </div>
+    </div>
+    <p>{{animal_name}}</p>
+    <div id="formContainer">
+        <button type="submit" form="uploadForm" id="submitButton">Submit</button>
+    </div>
+
+</body>
+</html>
